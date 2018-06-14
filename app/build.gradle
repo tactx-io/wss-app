@@ -24,24 +24,27 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.android.support:support-v4:26.1.0'
     compile fileTree(dir: 'libs', excludes: ["org.eclipse.paho.client.mqttv3-${rootProject.ext.clientVersion}.jar"], include: '*.jar')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
+    //compile 'com.android.support:appcompat-v7:26.+'
+
+    compile "com.android.support:appcompat-v7:27.1.1"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:26.+'
+    compile 'com.android.support:design:27.1.1'
     testCompile 'junit:junit:4.12'
     compile group: 'org.json', name: 'json', version: '20180130'
     compile "org.eclipse.paho:org.eclipse.paho.client.mqttv3:${rootProject.ext.clientVersion}"
-    compile (project(':org.eclipse.paho.android.service')){
+    compile(project(':org.eclipse.paho.android.service')) {
         //exclude module: "org.eclipse.paho.client.mqttv3"
-        transitive=true
+        transitive = true
     }
 }
 
 
 configurations.compile.exclude module: 'org.eclipse.paho.client.mqttv3'
 task debug << {
-    configurations.compile.each { println it}
+    configurations.compile.each { println it }
 }

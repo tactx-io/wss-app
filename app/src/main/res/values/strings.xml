@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">Wasserschischule</string>
     <string name="action_settings">Settings</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="wss">Wasserschischule</string>
+    <string name="unterach">Unterach am Attersee</string>
+    <string name="water_temp">Wassertemperatur</string>
+    <string name="air_temp">Aussentemperatur</string>
+    <string name="degree_unit">°C</string>
+    <string name="novalue">--.--°C</string>
+    <string name="detail">Die Wassertemperatur ist der Durchschnitt aus vier gemessenen Werten in unterschiedlicher Tiefe</string>
+    <string name="d0">-0.5m</string>
+    <string name="d1">-1.0m</string>
+    <string name="d2">-1.5m</string>
+    <string name="d3">-2.0m</string>
+
+    <string name="about">About</string>
+
 </resources>

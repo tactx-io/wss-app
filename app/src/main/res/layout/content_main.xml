@@ -8,6 +8,8 @@
     tools:context="io.tactx.wss.wasserschischule.MainActivity"
     tools:showIn="@layout/activity_main">
 
+
+
     <TextView
         android:id="@+id/sensor4"
         style="@android:style/Widget.DeviceDefault.Light.TextView"
@@ -17,6 +19,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="273dp"
         android:text="- waiting -"
+        android:fontFamily="@font/poiretoneregular"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

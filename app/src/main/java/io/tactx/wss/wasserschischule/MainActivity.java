@@ -1,8 +1,11 @@
 package io.tactx.wss.wasserschischule;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,10 +29,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
 
 
     private MqttAndroidClient mMqttAndroidClient;
+
 
     private final String mServerUri = "tcp://iot.eclipse.org:1883";
     private String mClientID = "wss-client";
@@ -38,27 +44,24 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvSensors[] = new TextView[4];
 
+    ViewPager mViewPager;
+    PagerAdapter mPagerAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mPagerAdapter);
 
-        tvSensors[0] = (TextView)findViewById(R.id.sensor1);
-        tvSensors[1] = (TextView)findViewById(R.id.sensor2);
-        tvSensors[2] = (TextView)findViewById(R.id.sensor3);
-        tvSensors[3] = (TextView)findViewById(R.id.sensor4);
+
+        //       tvSensors[0] = (TextView)findViewById(R.id.sensor1);
+        //      tvSensors[1] = (TextView)findViewById(R.id.sensor2);
+        ///     tvSensors[2] = (TextView)findViewById(R.id.sensor3);
+        //   tvSensors[3] = (TextView)findViewById(R.id.sensor4);
 
         mClientID = mClientID + System.currentTimeMillis();
 
@@ -84,25 +87,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void messageArrived(String topic, final MqttMessage message) throws Exception {
                 addToHistory("Incoming message: " + new String(message.getPayload()));
-  //              runOnUiThread(new Runnable() {
-  //                  @Override
-  //                  public void run() {
+                //              runOnUiThread(new Runnable() {
+                //                  @Override
+                //                  public void run() {
 
-                        String m = new String(message.getPayload());
-                        try {
-                            JSONArray a = new JSONArray(m);
-                            tvSensors[0].setText("sdfds");
-                            tvSensors[1].setText(a.getString(1));
-                            tvSensors[2].setText(a.getString(2));
-                            tvSensors[3].setText(a.getString(3));
+                String m = new String(message.getPayload());
+                try {
+                    JSONArray a = new JSONArray(m);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    //     tvSensors[0].setText("sdfds");
+                    //     tvSensors[1].setText(a.getString(1));
+                    //     tvSensors[2].setText(a.getString(2));
+                    //     tvSensors[3].setText(a.getString(3));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 
-     ///               }
-      //          });
+                ///               }
+                //          });
             }
 
             @Override
@@ -114,11 +118,6 @@ public class MainActivity extends AppCompatActivity {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
-
-
-
-
-
 
 
         try {
@@ -142,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-        } catch (MqttException ex){
+        } catch (MqttException ex) {
             ex.printStackTrace();
         }
     }
@@ -190,25 +189,35 @@ public class MainActivity extends AppCompatActivity {
                 public void messageArrived(String topic, final MqttMessage message) throws Exception {
                     // message Arrived!
                     System.out.println("Message: " + topic + " : " + new String(message.getPayload()));
-                                 runOnUiThread(new Runnable() {
-                                      @Override
-                                      public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 
-                    String m = new String(message.getPayload());
-                    try {
-                        JSONArray a = new JSONArray(m);
-                        tvSensors[0].setText(a.getString(0));
-                        tvSensors[1].setText(a.getString(1));
-                        tvSensors[2].setText(a.getString(2));
-                        tvSensors[3].setText(a.getString(3));
+                            String m = new String(message.getPayload());
+                            try {
+                                JSONArray a = new JSONArray(m);
+                                Double av = 0.0;
+                                for (int i = 0; i < 4; i++)
+                                    av += Double.parseDouble(a.getString(i + 1));
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                                av /= 4;
+
+                                DecimalFormat df = new DecimalFormat("##.##");
 
 
-                }
-            });
+                                mPagerAdapter.mainFragment.setValues(a.getString(0), df.format(av));
+                                mPagerAdapter.detailFragment.setValues(
+                                        a.getString(1),
+                                        a.getString(2),
+                                        a.getString(3),
+                                        a.getString(4)
+                                );
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                 }
             });
 
@@ -217,7 +226,50 @@ public class MainActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
     }
-    private void addToHistory(String s){
+
+    private void addToHistory(String s) {
         Log.d("MQTT-Main", s);
+    }
+
+
+    public static class PagerAdapter extends FragmentPagerAdapter {
+        private static int NUM_ITEMS = 3;
+
+        public PagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        // Returns total number of pages
+        @Override
+        public int getCount() {
+            return NUM_ITEMS;
+        }
+
+        MainFragment mainFragment = MainFragment.newInstance(0, "Page # 1");
+        DetailFragment detailFragment = DetailFragment.newInstance(0, "Page # 1");
+        AboutFragment aboutFragment = AboutFragment.newInstance(0, "Page # 1");
+
+
+        // Returns the fragment to display for that page
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0: // Fragment # 0 - This will show FirstFragment
+                    return mainFragment;
+                case 1: // Fragment # 0 - This will show FirstFragment different title
+                    return detailFragment;
+                case 2: // Fragment # 1 - This will show SecondFragment
+                    return aboutFragment;
+                default:
+                    return null;
+            }
+        }
+
+        // Returns the page title for the top indicator
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "Page " + position;
+        }
+
     }
 }
