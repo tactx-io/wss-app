@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final String mServerUri = "tcp://iot.eclipse.org:1883";
     private String mClientID = "wss-client";
-    private final String mSubTopic = "tactx/unterach/wss/water-temperatures";
+    private final String mSubTopic = "tactx/unterach/wss/temperatures";
 
 
     private TextView tvSensors[] = new TextView[4];
@@ -194,8 +194,15 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
 
                             String m = new String(message.getPayload());
+                            System.out.println(m);
+
                             try {
-                                JSONArray a = new JSONArray(m);
+                                JSONObject mesageObject = new JSONObject(m);
+
+                                JSONObject payloadObject = mesageObject.getJSONObject("payload");
+
+
+                                JSONArray a = payloadObject.getJSONArray("values");
                                 Double av = 0.0;
                                 for (int i = 0; i < 4; i++)
                                     av += Double.parseDouble(a.getString(i + 1));
@@ -216,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+
                         }
                     });
                 }

@@ -18,25 +18,27 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="293dp"
+        android:layout_height="383dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="90dp"
-        android:paddingBottom="0dp">
+        android:layout_marginBottom="0dp"
+        android:paddingBottom="0dp"
+        android:stretchColumns="*">
+
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="50px">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/watertemp0"
+                android:id="@+id/watertemp3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="87dp"
+                android:layout_gravity="bottom|right"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
                 android:text="@string/novalue"
-                android:textAlignment="center"
                 android:textSize="60dp" />
 
             <TextView
@@ -44,26 +46,28 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="87dp"
+                android:layout_gravity="bottom|left"
+                android:gravity="bottom|left"
                 android:text="@string/d0"
+                android:includeFontPadding="false"
                 android:textAlignment="center"
                 android:textSize="25dp" />
 
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="50px">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/watertemp1"
+                android:id="@+id/watertemp2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="87dp"
+                android:layout_gravity="bottom|right"
+                android:includeFontPadding="false"
                 android:text="@string/novalue"
-                android:textAlignment="center"
                 android:textSize="60dp" />
 
             <TextView
@@ -72,25 +76,28 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="87dp"
-                android:text="@string/d0"
+                android:layout_gravity="bottom|left"
+                android:gravity="bottom|left"
+                android:hapticFeedbackEnabled="false"
+                android:includeFontPadding="false"
+                android:text="@string/d1"
                 android:textAlignment="center"
                 android:textSize="25dp" />
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="106dp">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/watertemp2"
+                android:id="@+id/watertemp1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="87dp"
+                android:layout_gravity="bottom|right"
+                android:includeFontPadding="false"
                 android:text="@string/novalue"
-                android:textAlignment="center"
                 android:textSize="60dp" />
 
             <TextView
@@ -99,25 +106,28 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="87dp"
-                android:text="@string/d0"
+                android:layout_gravity="bottom|left"
+                android:gravity="bottom|left"
+                android:text="@string/d2"
                 android:textAlignment="center"
+                android:includeFontPadding="false"
                 android:textSize="25dp" />
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/watertemp3"
+                android:id="@+id/watertemp0"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="87dp"
+                android:layout_gravity="bottom|right"
+
+                android:includeFontPadding="false"
                 android:text="@string/novalue"
-                android:textAlignment="center"
                 android:textSize="60dp" />
 
             <TextView
@@ -126,9 +136,11 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="87dp"
-                android:text="@string/d0"
+                android:layout_gravity="left"
+                android:gravity="bottom|left"
+                android:text="@string/d3"
                 android:textAlignment="center"
+                android:includeFontPadding="false"
                 android:textSize="25dp" />
         </TableRow>
     </TableLayout>

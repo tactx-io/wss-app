@@ -30,8 +30,10 @@ public class MainFragment extends Fragment {
 
     public void setValues(String air, String water){
         System.out.println("air " + air + " --- water " + water);
-        mAirTemp.setText(air + "°C");
-        mWaterTemp.setText(water + "°C");
+        if(mAirTemp != null)
+            mAirTemp.setText(air + "°C");
+        if(mWaterTemp != null)
+            mWaterTemp.setText(water + "°C");
 
     }
 

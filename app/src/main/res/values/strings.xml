@@ -9,12 +9,18 @@
     <string name="air_temp">Aussentemperatur</string>
     <string name="degree_unit">°C</string>
     <string name="novalue">--.--°C</string>
-    <string name="detail">Die Wassertemperatur ist der Durchschnitt aus vier gemessenen Werten in unterschiedlicher Tiefe</string>
+
+    <string name="gowebsite">Website</string>
+
+
+    <string name="detail">Gemessen wird die Wassertemperatur in vier unterschiedlichen Tiefen</string>
     <string name="d0">-0.5m</string>
     <string name="d1">-1.0m</string>
     <string name="d2">-1.5m</string>
     <string name="d3">-2.0m</string>
 
+
     <string name="about">About</string>
+    <string name="disclaimer">Die Temperaturwerte werden alle 5 Minuten aktualisiert. Wir garantieren nicht für eine permanente Funktionalität und Verfügbarkeit. \n Es werden weder persönliche Daten erhoben noch gespeichert \nDie App benötigt keine speziellen Freigaben vom vom Benutzer, jeoch wird für die korrekte Funktion eine Verbindung zum Internet vorausgesetzt</string>
 
 </resources>

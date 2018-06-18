@@ -27,10 +27,10 @@ public class DetailFragment extends Fragment {
     private TextView[] mTemp = new TextView[4];
 
     public void setValues(String t0, String t1, String t2, String t3){
-        this.mTemp[0].setText(t0);
+ /*       this.mTemp[0].setText(t0);
         this.mTemp[1].setText(t1);
         this.mTemp[2].setText(t2);
-        this.mTemp[3].setText(t3);
+        this.mTemp[3].setText(t3); */
     }
 
 
@@ -70,10 +70,12 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_detail, container, false);
-        this.mTemp[0] = (TextView)v.findViewById(R.id.watertemp0);
-        this.mTemp[1] = (TextView)v.findViewById(R.id.watertemp1);
-        this.mTemp[2] = (TextView)v.findViewById(R.id.watertemp2);
-        this.mTemp[3] = (TextView)v.findViewById(R.id.watertemp3);
+        if(this.mTemp[0] != null) {
+            this.mTemp[0] = (TextView) v.findViewById(R.id.watertemp0);
+            this.mTemp[1] = (TextView) v.findViewById(R.id.watertemp1);
+            this.mTemp[2] = (TextView) v.findViewById(R.id.watertemp2);
+            this.mTemp[3] = (TextView) v.findViewById(R.id.watertemp3);
+        }
 
         return v;
     }
