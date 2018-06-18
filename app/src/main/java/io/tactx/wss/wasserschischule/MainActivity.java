@@ -29,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -200,17 +201,16 @@ public class MainActivity extends AppCompatActivity {
                                 JSONObject mesageObject = new JSONObject(m);
 
                                 JSONObject payloadObject = mesageObject.getJSONObject("payload");
-
-
                                 JSONArray a = payloadObject.getJSONArray("values");
                                 Double av = 0.0;
                                 for (int i = 0; i < 4; i++)
                                     av += Double.parseDouble(a.getString(i + 1));
-
                                 av /= 4;
 
-                                DecimalFormat df = new DecimalFormat("##.##");
+                                Timestamp ts = new Timestamp(Long.parseLong(mesageObject.getString("timestamp")));
+                                Log.d("MainActivity", ts.toString());
 
+                                DecimalFormat df = new DecimalFormat("##.##");
 
                                 mPagerAdapter.mainFragment.setValues(a.getString(0), df.format(av));
                                 mPagerAdapter.detailFragment.setValues(
@@ -223,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
                         }
                     });
                 }

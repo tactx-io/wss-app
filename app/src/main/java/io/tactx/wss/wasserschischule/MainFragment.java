@@ -28,7 +28,12 @@ public class MainFragment extends Fragment {
     private TextView mAirTemp;
     private TextView mWaterTemp;
 
+    private String mAirTempValue;
+    private String mWaterTempValue;
+
     public void setValues(String air, String water){
+        mAirTempValue = air;
+        mWaterTempValue = water;
         System.out.println("air " + air + " --- water " + water);
         if(mAirTemp != null)
             mAirTemp.setText(air + "°C");
@@ -68,6 +73,11 @@ public class MainFragment extends Fragment {
             mPage = getArguments().getInt(ARG_PAGE);
             mTitle = getArguments().getString(ARG_TITLE);
         }
+
+        if(mAirTemp != null)
+            mAirTemp.setText(mAirTempValue + "°C");
+        if(mWaterTemp != null)
+            mWaterTemp.setText(mWaterTempValue + "°C");
 
 
 
